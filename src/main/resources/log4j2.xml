@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO">
+<Configuration status="DEBAG">
+    <Properties>
+        <Property name="basePath">C:/projects/hr/logs</Property>
+    </Properties>
+
     <Appenders>
         <Console name="LogToConsole" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-        <File name="LogToFile" fileName="logs/app.log">
+        <File name="LogToFile" fileName="${basePath}/app.log">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>
@@ -13,11 +17,9 @@
     <Loggers>
         <Logger name="com.dmitriygoridov.spring.mvc_hibernate_aop.aspect.LoggingAspect" level="info" additivity="false">
             <AppenderRef ref="LogToFile"/>
-            <AppenderRef ref="LogToConsole"/>
         </Logger>
-        <Root level="error">
-            <AppenderRef ref="LogToFile"/>
-            <AppenderRef ref="LogToConsole"/>
+        <Root level="error" additivity="false">
+            <appender-ref ref="LogToConsole" />
         </Root>
     </Loggers>
 </Configuration>
